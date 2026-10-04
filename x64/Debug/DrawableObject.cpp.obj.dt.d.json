@@ -1,0 +1,12 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\drawableobject.cpp",
+        "ProvidedModule": "",
+        "Includes": [
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\drawableobject.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
