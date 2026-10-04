@@ -7,31 +7,29 @@
 #include <iterator>
 #include <iostream>
 
-
-
-auto ShaderProgram::use() -> void
+auto ShaderProgram::use() const -> void
 {
 	glUseProgram(this->id);
 }
 
 auto ShaderProgram::setUniform(const std::string& name, float value) -> void
 {
-	GLint location = glGetUniformLocation(this->id, name.c_str());
-	if (location == -1) {
-		std::cout << "Uniform '" << name << "' not found in shader program";
+	GLint loc = glGetUniformLocation(this->id, name.c_str());
+	if (loc == -1) {
+		std::cout << "Uniform " << name << " not found in shader program";
 		return;
 	}
-	glUniform1f(location, value);
+	glUniform1f(loc, value);
 }
 
 auto ShaderProgram::setUniform(const std::string& name, float x, float y, float z) -> void
 {
-	GLint location = glGetUniformLocation(this->id, name.c_str());
-	if (location == -1) {
+	GLint loc = glGetUniformLocation(this->id, name.c_str());
+	if (loc == -1) {
 		std::cout << "Uniform " << name << " not found in shader program";
 		return;
 	}
-	glUniform3f(location, x, y, z);
+	glUniform3f(loc, x, y, z);
 }
 ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 {
@@ -58,6 +56,7 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 
 GLuint ShaderProgram::createShaderFromFile(GLenum shaderType, const char* shaderFile) {
 	GLuint shaderID = glCreateShader(shaderType);
+
 	if (shaderID == 0) {
 		std::cout << "Unable to create shader" << std::endl;
 		exit(EXIT_FAILURE);

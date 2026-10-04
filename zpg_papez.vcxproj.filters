@@ -24,16 +24,10 @@
     <ClInclude Include="src\Graphics\ShaderProgram.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
+    <ClInclude Include="src\Graphics\Scene.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
-    <ClInclude Include="DrawableObject.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Transformation.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="src\Miscs\SceneCreator.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,16 +44,10 @@
     <ClCompile Include="src\Application\Application.cpp">
       <Filter>Soubory zdrojů</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
+    <ClCompile Include="src\Graphics\Scene.cpp">
       <Filter>Soubory zdrojů</Filter>
     </ClCompile>
-    <ClCompile Include="DrawableObject.cpp">
-      <Filter>Soubory zdrojů</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Soubory zdrojů</Filter>
-    </ClCompile>
-    <ClCompile Include="Transformation.cpp">
+    <ClCompile Include="src\Miscs\SceneCreator.cpp">
       <Filter>Soubory zdrojů</Filter>
     </ClCompile>
   </ItemGroup>

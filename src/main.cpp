@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Martin Němec
+ * Copyright (c) 2026 Ondřej Papež
  *
  * File: main.cpp
  * Description:  Fixed Function Pipeline.
@@ -9,12 +9,14 @@
 
 int main(void)
 {
-	Application* app = new Application();
-	app->initialization();
+	Application app;
+	app.initialization();
 
 	//Loading scene
-	app->createShaders();
-	app->createModels();
-	app->run();
+	app.createShaders();
+	app.createScenes();
+	app.run();
+
+	return 0;
 
 }

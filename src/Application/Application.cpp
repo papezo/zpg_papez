@@ -1,6 +1,5 @@
 #include "src/Application/Application.h"
-
-#include "../../Models/sphere.h"
+#include "src/Miscs/SceneCreator.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -12,9 +11,33 @@ auto Application::error_callback(int error, const char* description) -> void { f
 
 auto Application::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) -> void
 {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
+	auto* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
+
+	if (action == GLFW_PRESS)
+	{
+		if (key == GLFW_KEY_ESCAPE)
+		{
+			glfwSetWindowShouldClose(window, GLFW_TRUE);
+		}
+
+		switch (key)
+		{
+		case GLFW_KEY_1:
+			app->setActiveScene(0);
+			break;
+		case GLFW_KEY_2:
+			app->setActiveScene(1);
+			break;
+		case GLFW_KEY_3:
+			app->setActiveScene(2);
+			break;
+		case GLFW_KEY_4:
+			app->setActiveScene(3);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 auto Application::window_focus_callback(GLFWwindow* window, int focused) -> void { printf("window_focus_callback \n"); }
@@ -58,6 +81,10 @@ auto Application::initialization() -> void
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
+	// This is important to add bcs we need to access Application instance and without this 
+	// we cant use keyboard callbacks
+	glfwSetWindowUserPointer(window, this);
+
 	// GLFW callbacks
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetWindowFocusCallback(window, window_focus_callback);
@@ -90,19 +117,23 @@ auto Application::createShaders() -> void
 	shader = std::make_unique<ShaderProgram>("Shaders/basic.vert", "Shaders/basic.frag");
 }
 
+
 auto Application::createScenes() -> void
 {
-	scenes.push_back(std::make_unique<Scene>());
+	scenes.push_back(SceneCreator::createTriangleScene());
+	scenes.push_back(SceneCreator::createSphereScene());
+	scenes.push_back(SceneCreator::createForestScene());
+	scenes.push_back(SceneCreator::createLoginScene());
 }
 
-auto Application::setActiveScene(int index) -> void
+auto Application::setActiveScene(size_t index) -> void
 {
 	if (index >= 0 && index < scenes.size())
 	{
 		this->activeSceneIndex = index;
 	}
 	else {
-		printf("Invalid scene index: %d\n", index);
+		printf("This scene doesnt exist\n");
 	}
 }	
 
@@ -112,6 +143,12 @@ auto Application::run() -> void
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		if (shader && activeSceneIndex >= 0 && activeSceneIndex < scenes.size())
+		{
+			shader->use();
+			scenes[activeSceneIndex]->render(*shader);
+		}
 
 
 		glfwSwapBuffers(window);

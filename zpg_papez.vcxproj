@@ -19,23 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DrawableObject.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="src\Application\Application.h" />
     <ClInclude Include="src\Graphics\Model.h" />
+    <ClInclude Include="src\Graphics\Scene.h" />
     <ClInclude Include="src\Graphics\ShaderProgram.h" />
-    <ClInclude Include="Transformation.h" />
+    <ClInclude Include="src\Miscs\SceneCreator.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DrawableObject.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Graphics\Model.cpp" />
+    <ClCompile Include="src\Graphics\Scene.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="Transformation.cpp" />
+    <ClCompile Include="src\Miscs\SceneCreator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>

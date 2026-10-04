@@ -1,4 +1,5 @@
 #include "src/Graphics/Model.h"
+#include "ShaderProgram.h"
 
 
 Model::Model(const float* model, size_t floatCount)
@@ -23,11 +24,42 @@ Model::Model(const float* model, size_t floatCount)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 }
 
-auto Model::draw() -> void
+auto Model::draw(ShaderProgram& shader) -> void
 {
-	glBindVertexArray(VAO);
+	shader.setUniform("uTranslation", this->posX, this->posY, this->posZ);
+	shader.setUniform("uScale", this->scale, this->scale, this->scale);
+	shader.setUniform("uAngle", this->angle);
+	shader.setUniform("fragmentColor", this->colorR, this->colorG, this->colorB);
+
+	glBindVertexArray(this->VAO);
 	// Draw a triangles
-	glDrawArrays(GL_TRIANGLES, 0, vertexCount); //mode,first,count
+	glDrawArrays(GL_TRIANGLES, 0, this->vertexCount); //mode,first,count
+	glBindVertexArray(0);
+}
+
+auto Model::setScale(float s) -> void
+{
+	this->scale = s;
+}
+
+auto Model::setPosition(float x, float y, float z) -> void
+{
+	this->posX = x;
+	this->posY = y;
+	this->posZ = z;
+}
+
+auto Model::setAngle(float a) -> void
+{
+	this->angle = a;
+}
+
+auto Model::setColor(float r, float g, float b) -> void
+{
+	this->colorR = r;	
+	this->colorG = g;
+	this->colorB = b;
+	
 }
 
 Model::~Model()

@@ -5,9 +5,9 @@ layout (location = 1) in vec3 color;
 
 out vec3 vertexColor;
 
-uniform vec3 uTranslation; // posun
-uniform vec3 uScale; // meritko
-uniform float uAngle; // uhel v radianecvh
+uniform vec3 uTranslation; 
+uniform vec3 uScale; 
+uniform float uAngle; // angle in rads
 
 void main()
 {

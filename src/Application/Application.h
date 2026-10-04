@@ -8,7 +8,7 @@
 
 #include "../Graphics/Model.h"
 #include "../Graphics/ShaderProgram.h"
-#include <Scene.h>
+#include "../Graphics/Scene.h"
 
 class Application
 {
@@ -16,7 +16,7 @@ public:
 	auto createShaders() -> void;
 	auto initialization() -> void;
 	auto createScenes() -> void;
-	auto setActiveScene(int index) -> void;
+	auto setActiveScene(size_t index) -> void;
 	auto run() -> void;
 
 	~Application();
@@ -35,7 +35,5 @@ private:
 	static auto window_size_callback(GLFWwindow* window, int width, int height) -> void;
 	static auto cursor_callback(GLFWwindow* window, double x, double y) -> void;
 	static auto button_callback(GLFWwindow* window, int button, int action, int mode) -> void;
-
-
 
 };
