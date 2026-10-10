@@ -1,11 +1,8 @@
-#include "src/Graphics/Model.h"
-#include "ShaderProgram.h"
+#include "Model.h"
 
 
-Model::Model(const float* model, size_t floatCount)
+Model::Model(const float* model, size_t floatCount, int floatsPerVertex) : floatsPerVertex(floatsPerVertex)
 {
-	vertexCount = floatCount / 6; // 6 floats per vertex (3 for position, 3 for normal)
-
 	//vertex buffer object (VBO)
 	VBO = 0;
 	glGenBuffers(1, &VBO); // generate the VBO
@@ -20,47 +17,35 @@ Model::Model(const float* model, size_t floatCount)
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	// index, number of components, data type, normalized, vertex stride, offset
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)0);
+
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+
+	// if model has normals load also normals on attribute 2
+	if (floatsPerVertex >= 9)
+	{
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)(6 * sizeof(float)));
+	}
 }
 
-auto Model::draw(ShaderProgram& shader) -> void
+auto Model::draw() const -> void
 {
-	shader.setUniform("uTranslation", this->posX, this->posY, this->posZ);
-	shader.setUniform("uScale", this->scale, this->scale, this->scale);
-	shader.setUniform("uAngle", this->angle);
-	shader.setUniform("fragmentColor", this->colorR, this->colorG, this->colorB);
+	// just to get the number of vertices in the buffer 
+	// we can query the buffer size and divide by the size of a single vertex
+	GLint buffSize = 0;
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &buffSize);
 
+	GLsizei count = buffSize / (sizeof(float) * this->floatsPerVertex); 
 	glBindVertexArray(this->VAO);
 	// Draw a triangles
-	glDrawArrays(GL_TRIANGLES, 0, this->vertexCount); //mode,first,count
+	glDrawArrays(GL_TRIANGLES, 0, count); //mode,first,count
 	glBindVertexArray(0);
 }
 
-auto Model::setScale(float s) -> void
-{
-	this->scale = s;
-}
-
-auto Model::setPosition(float x, float y, float z) -> void
-{
-	this->posX = x;
-	this->posY = y;
-	this->posZ = z;
-}
-
-auto Model::setAngle(float a) -> void
-{
-	this->angle = a;
-}
-
-auto Model::setColor(float r, float g, float b) -> void
-{
-	this->colorR = r;	
-	this->colorG = g;
-	this->colorB = b;
-	
-}
 
 Model::~Model()
 {

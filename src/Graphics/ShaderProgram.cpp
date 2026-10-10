@@ -16,7 +16,7 @@ auto ShaderProgram::setUniform(const std::string& name, float value) -> void
 {
 	GLint loc = glGetUniformLocation(this->id, name.c_str());
 	if (loc == -1) {
-		std::cout << "Uniform " << name << " not found in shader program";
+		//std::cout << "Uniform " << name << " not found in shader program";
 		return;
 	}
 	glUniform1f(loc, value);
@@ -26,11 +26,22 @@ auto ShaderProgram::setUniform(const std::string& name, float x, float y, float 
 {
 	GLint loc = glGetUniformLocation(this->id, name.c_str());
 	if (loc == -1) {
-		std::cout << "Uniform " << name << " not found in shader program";
+		//std::cout << "Uniform " << name << " not found in shader program";
 		return;
 	}
 	glUniform3f(loc, x, y, z);
 }
+
+auto ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix) -> void
+{
+	GLint loc = glGetUniformLocation(this->id, name.c_str());
+	if (loc == -1) {
+		//std::cout << "Uniform " << name << " not found in shader program";
+		return;
+	}
+	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
 ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 {
 	GLuint vertexShader = createShaderFromFile(GL_VERTEX_SHADER, vertexFile);

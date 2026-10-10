@@ -20,16 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Application.h" />
+    <ClInclude Include="src\Graphics\DrawableObject.h" />
     <ClInclude Include="src\Graphics\Model.h" />
     <ClInclude Include="src\Graphics\Scene.h" />
     <ClInclude Include="src\Graphics\ShaderProgram.h" />
+    <ClInclude Include="src\Graphics\Transformation.h" />
     <ClInclude Include="src\Miscs\SceneCreator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\Application.cpp" />
+    <ClCompile Include="src\Graphics\DrawableObject.cpp" />
     <ClCompile Include="src\Graphics\Model.cpp" />
     <ClCompile Include="src\Graphics\Scene.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
+    <ClCompile Include="src\Graphics\Transformation.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Miscs\SceneCreator.cpp" />
   </ItemGroup>
@@ -126,7 +130,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)libs\glad\include;$(ProjectDir)libs\glfw-3.5.1\include;$(ProjectDir)libs\Models;$(ProjectDir);$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)libs\glad\include;$(ProjectDir)libs\glfw-3.5.1\include;$(ProjectDir)libs\Models;$(ProjectDir);$(ProjectDir)src;$(ProjectDir)\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

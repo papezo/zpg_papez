@@ -30,6 +30,12 @@
     <ClInclude Include="src\Miscs\SceneCreator.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
+    <ClInclude Include="src\Graphics\DrawableObject.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Transformation.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Graphics\Model.cpp">
@@ -48,6 +54,12 @@
       <Filter>Soubory zdrojů</Filter>
     </ClCompile>
     <ClCompile Include="src\Miscs\SceneCreator.cpp">
+      <Filter>Soubory zdrojů</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\DrawableObject.cpp">
+      <Filter>Soubory zdrojů</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Transformation.cpp">
       <Filter>Soubory zdrojů</Filter>
     </ClCompile>
   </ItemGroup>

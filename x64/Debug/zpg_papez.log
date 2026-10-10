@@ -1,3 +1,4 @@
-﻿  ShaderProgram.cpp
+﻿  Application.cpp
+C:\Users\papez\source\repos\zpg_papez\zpg_papez\src\Application\Application.cpp(130,28): warning C4267: =: Převod z: size_t na: int, může dojít ke ztrátě dat.
 LINK : warning LNK4098: Výchozí knihovna MSVCRT je v konfliktu s použitím jiných knihoven. Použijte /NODEFAULTLIB:library.
   zpg_papez.vcxproj -> C:\Users\papez\source\repos\zpg_papez\x64\Debug\zpg_papez.exe

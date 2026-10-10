@@ -120,10 +120,7 @@ auto Application::createShaders() -> void
 
 auto Application::createScenes() -> void
 {
-	scenes.push_back(SceneCreator::createTriangleScene());
-	scenes.push_back(SceneCreator::createSphereScene());
-	scenes.push_back(SceneCreator::createForestScene());
-	scenes.push_back(SceneCreator::createLoginScene());
+	scenes.push_back(SceneCreator::createEarth());
 }
 
 auto Application::setActiveScene(size_t index) -> void
@@ -146,8 +143,7 @@ auto Application::run() -> void
 
 		if (shader && activeSceneIndex >= 0 && activeSceneIndex < scenes.size())
 		{
-			shader->use();
-			scenes[activeSceneIndex]->render(*shader);
+			scenes[activeSceneIndex].render();
 		}
 
 

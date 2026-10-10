@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\ScenesEnum.obj",
+            "outputs": [
+                "x64\\Debug\\ScenesEnum.h_F14B740FD2EF5E1.ifc.dt.module.json",
+                "x64\\Debug\\ScenesEnum.h_F14B740FD2EF5E1.ifc.dt.d.json",
+                "x64\\Debug\\ScenesEnum.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\Miscs\\ScenesEnum.h",
+                    "source-path": "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\miscs\\scenesenum.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

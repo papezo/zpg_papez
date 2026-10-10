@@ -117,7 +117,9 @@
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\__msvc_string_view.hpp",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\cctype",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\ctype.h",
-            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\scene.h"
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\scene.h",
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\drawableobject.h",
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\transformation.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

@@ -1,26 +1,15 @@
 #include "Scene.h"
 #include <Graphics/ShaderProgram.h>
 
-
-auto Scene::addModel(std::unique_ptr<Model> model) -> void
+auto Scene::addObject(std::unique_ptr<DrawableObject> object) -> void
 {
-    this->models.push_back(std::move(model));
+    this->objects.push_back(std::move(object));
 }
 
-auto Scene::render(ShaderProgram& shader) const -> void
+auto Scene::render() const -> void
 {
-    for (const auto& model : models)
+    for (const auto& model : objects)
     {
-        model->draw(shader);
+        model->draw();
     }
-}
-
-auto Scene::getModel(int index) const -> Model*
-{
-    if (index >= 0 && index < models.size())
-    {
-        return models[index].get();
-    }
-
-    return nullptr;
 }

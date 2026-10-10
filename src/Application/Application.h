@@ -20,11 +20,12 @@ public:
 	auto run() -> void;
 
 	~Application();
+	Application() = default;
 
 private:
 	GLFWwindow* window = nullptr;
 	std::unique_ptr<ShaderProgram> shader;
-	std::vector<std::unique_ptr<Scene>> scenes;
+	std::vector<Scene> scenes;
 	int activeSceneIndex = 0;
 
 
