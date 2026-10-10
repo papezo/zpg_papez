@@ -11,12 +11,12 @@ public:
 		: model(std::move(model)), shader(std::move(shaderProgram)) {
 	};
 
+	auto setTransformation(std::shared_ptr<Transformation> t) -> void;
 	auto draw() -> void;
-	auto setShader(std::shared_ptr<ShaderProgram> shaderProgram) -> void;
-	Transformation transformation;
 
 private:
 	std::shared_ptr<Model> model;
 	std::shared_ptr<ShaderProgram> shader;
+	std::shared_ptr<Transformation> transformation;
 
 };

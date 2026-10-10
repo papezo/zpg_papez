@@ -328,7 +328,10 @@
             "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\drawableobject.h",
             "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\transformation.h",
             "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\libs\\glfw-3.5.1\\include\\glfw\\glfw3.h",
-            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\models\\earth.h"
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\models\\earth.h",
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\compositetransform.h",
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\statictransformations.h",
+            "c:\\users\\papez\\source\\repos\\zpg_papez\\zpg_papez\\src\\graphics\\dynamicrotate.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

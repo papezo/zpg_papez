@@ -20,10 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Application.h" />
+    <ClInclude Include="src\Graphics\CompositeTransform.h" />
     <ClInclude Include="src\Graphics\DrawableObject.h" />
+    <ClInclude Include="src\Graphics\DynamicRotate.h" />
     <ClInclude Include="src\Graphics\Model.h" />
     <ClInclude Include="src\Graphics\Scene.h" />
     <ClInclude Include="src\Graphics\ShaderProgram.h" />
+    <ClInclude Include="src\Graphics\StaticTransformations.h" />
     <ClInclude Include="src\Graphics\Transformation.h" />
     <ClInclude Include="src\Miscs\SceneCreator.h" />
   </ItemGroup>
