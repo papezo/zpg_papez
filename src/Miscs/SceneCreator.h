@@ -12,8 +12,10 @@
 class SceneCreator
 {
 public:
-    static auto createEarth() -> Scene;
-
-private:
-    static auto createSignature() -> std::unique_ptr<DrawableObject>;
+    static auto createEarth() -> std::unique_ptr<DrawableObject>;
+	static auto createSun() -> std::unique_ptr<DrawableObject>;
+	static auto createMoon() -> std::unique_ptr<DrawableObject>;
+	static auto createTriangle() -> Scene;
+	static auto createForest() -> Scene;
+	static auto createSolarSystem() -> Scene;
 };

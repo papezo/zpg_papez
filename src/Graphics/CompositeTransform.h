@@ -14,7 +14,7 @@ public:
 	glm::mat4 getModelMatrix() override {
 		glm::mat4 result = glm::mat4(1.0f);
 		for (const auto& t : transformations) {
-			result = result * t->getModelMatrix();
+			result = t->getModelMatrix() * result;
 		}
 		return result;
 	}

@@ -71,7 +71,7 @@ auto Application::initialization() -> void
 	GLFW_OPENGL_CORE_PROFILE);  //*/
 
 
-	window = glfwCreateWindow(800, 600, "ZPG", NULL, NULL);
+	window = glfwCreateWindow(1200, 800, "ZPG", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -120,7 +120,9 @@ auto Application::createShaders() -> void
 
 auto Application::createScenes() -> void
 {
-	scenes.push_back(SceneCreator::createEarth());
+	scenes.push_back(SceneCreator::createSolarSystem());
+	scenes.push_back(SceneCreator::createTriangle());
+	scenes.push_back(SceneCreator::createForest());
 }
 
 auto Application::setActiveScene(size_t index) -> void
