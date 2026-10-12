@@ -65,7 +65,7 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile)
 	glDeleteShader(fragmentShader);
 }
 
-GLuint ShaderProgram::createShaderFromFile(GLenum shaderType, const char* shaderFile) {
+auto ShaderProgram::createShaderFromFile(GLenum shaderType, const char* shaderFile) -> GLuint {
 	GLuint shaderID = glCreateShader(shaderType);
 
 	if (shaderID == 0) {

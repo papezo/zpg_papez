@@ -11,13 +11,15 @@ public:
 		transformations.push_back(t);
 	}
 
-	glm::mat4 getModelMatrix() override {
-		glm::mat4 result = glm::mat4(1.0f);
-		for (const auto& t : transformations) {
-			result = t->getModelMatrix() * result;
-		}
-		return result;
-	}
+    auto getModelMatrix() -> glm::mat4 override {
+        glm::mat4 result(1.0f);
+
+        for (const auto& t : transformations) {
+            result = result * t->getModelMatrix();
+        }
+
+        return result;
+    }
 
 private:
 	std::vector<std::shared_ptr<Transformation>> transformations;

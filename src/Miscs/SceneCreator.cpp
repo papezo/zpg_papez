@@ -21,23 +21,15 @@
 
 auto SceneCreator::createEarth() -> std::unique_ptr<DrawableObject>
 {
-	Scene scene;
-
 	auto earthModel = std::make_shared<Model>(earth, sizeof(earth) / sizeof(float), 9);
 	auto earthShader = std::make_shared<ShaderProgram>("Shaders/basic.vert", "Shaders/basic.frag");
 	auto earthObject = std::make_unique<DrawableObject>(earthModel, earthShader);
 
 	auto composite = std::make_shared<CompositeTransform>();
 
-	/* second argument defines the speed of the rotation 
-	third arg (vector) defines the axis - in this case y says go right */
-
-	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.01f, glm::vec3(0.0f, 1.0f, 0.0f)));
-	composite->add(std::make_shared<Translate>(5.5f, 0.0f, 0.0f));
-	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.01f, glm::vec3(0.0f, 0.0f, 1.0f)));
-	composite->add(std::make_shared<Translate>(0.5f, 0.0f, 0.0f));
-
-	composite->add(std::make_shared<Scale>(0.15f));
+	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.002f, glm::vec3(0.0f, 1.0f, 0.0f))); // Earth & Sun rotation
+	composite->add(std::make_shared<Translate>(0.55f, 0.0f, 0.0f));
+	composite->add(std::make_shared<Scale>(0.1f));
 
 	earthObject->setTransformation(composite);
 
@@ -52,14 +44,16 @@ auto SceneCreator::createMoon() -> std::unique_ptr<DrawableObject>
 
 	auto composite = std::make_shared<CompositeTransform>();
 
-	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.02f, glm::vec3(0.0f, 0.0f, 1.0f))); 
-	composite->add(std::make_shared<Translate>(3.5f, 0.0f, 0.0f));                           
-	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.02f, glm::vec3(0.0f, 0.0f, 1.0f)));
-	composite->add(std::make_shared<Translate>(0.7f, 0.0f, 0.0f));
-
-	composite->add(std::make_shared<Scale>(0.1f));
+	// this has to be same as first rotation of earth!
+	// its for moon to rotate same as earth by the sun
+	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.002f, glm::vec3(0.0f, 1.0f, 0.0f))); 
+	composite->add(std::make_shared<Translate>(0.55f, 0.0f, 0.0f)); // earth & sun distance
+	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.005f, glm::vec3(0.0f, 1.0f, 0.0f)));  // Moon & Earth rotation
+	composite->add(std::make_shared<Translate>(0.20f, 0.0f, 0.0f)); // Moon & sun distance
+	composite->add(std::make_shared<Scale>(0.05f));
 
 	moonObject->setTransformation(composite);
+
 	return moonObject;
 }
 
@@ -101,13 +95,11 @@ auto SceneCreator::createTriangle() -> Scene
 	return scene;
 
 }
-
-
 auto SceneCreator::createForest() -> Scene
 {
 	Scene scene;
-	float radius = 6.0f;
-	float angleStep = (2.0f * M_PI) / 14.0f;
+	float radius = 4.0f;
+	float angleStep = (2.0f * M_PI) / 12.0f;
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -134,9 +126,8 @@ auto SceneCreator::createForest() -> Scene
 		float posX = std::cos(angle) * radius;
 		float posY = std::sin(angle) * radius;
 
-		composite->add(std::make_shared<Translate>(posX, posY, 0.0f));
 		composite->add(std::make_shared<Scale>(0.08f));
-		
+		composite->add(std::make_shared<Translate>(posX, posY, 0.0f));
 
 		treeObj->setTransformation(composite);
 		scene.addObject(std::move(treeObj));
@@ -153,8 +144,9 @@ auto SceneCreator::createForest() -> Scene
 		float posX = std::cos(angle) * bushRadius;
 		float posY = std::sin(angle) * bushRadius;
 
-		composite->add(std::make_shared<Translate>(posX, posY, 0.0f));
 		composite->add(std::make_shared<Scale>(0.5f));
+		composite->add(std::make_shared<Translate>(posX, posY, 0.0f));
+		
 
 
 		bushObj->setTransformation(composite);
@@ -163,8 +155,6 @@ auto SceneCreator::createForest() -> Scene
 
 	return scene;
 }
-
-
 auto SceneCreator::createSolarSystem() -> Scene
 {
 	Scene scene;

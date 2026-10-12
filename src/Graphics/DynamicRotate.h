@@ -7,8 +7,8 @@ public:
 	DynamicRotate(float initialAngle, float stepPerFrame, const glm::vec3& axis)
 		: Rotate(initialAngle, axis), step(stepPerFrame) { }
 
-	glm::mat4 getModelMatrix() override{
-		this->angle += this->step;
+	auto getModelMatrix() -> glm::mat4 override{
+		this->angle += this->step; 
 
 		return glm::rotate(glm::mat4(1.0f), glm::radians(this->angle), this->axis);
 	}
