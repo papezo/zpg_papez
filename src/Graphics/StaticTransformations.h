@@ -1,6 +1,6 @@
 #pragma once
 #include "Transformation.h"
-#include <libs/glm/glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 
 

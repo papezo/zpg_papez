@@ -1,4 +1,5 @@
-#include "src/Graphics/ShaderProgram.h"
+#include "Graphics/ShaderProgram.h"
+#include "Graphics/Camera.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -98,6 +99,11 @@ auto ShaderProgram::createShaderFromFile(GLenum shaderType, const char* shaderFi
 	return shaderID;
 }
 
+auto ShaderProgram::update(const glm::mat4& view) -> void
+{
+	use();
+	setUniform("viewMatrix", view);
+}
 
 ShaderProgram::~ShaderProgram()
 {

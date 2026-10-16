@@ -2,8 +2,8 @@
 
 #pragma once
 #include <memory>
-#include "../Graphics/Scene.h"
-#include "../Graphics/DrawableObject.h"
+#include "Graphics/Scene.h"
+#include "Graphics/DrawableObject.h"
 
 /*
 	Helper class to create scenes and models for the application. 
@@ -12,10 +12,7 @@
 class SceneCreator
 {
 public:
-    static auto createEarth() -> std::unique_ptr<DrawableObject>;
-	static auto createSun() -> std::unique_ptr<DrawableObject>;
 	static auto createMoon() -> std::unique_ptr<DrawableObject>;
-	static auto createTriangle() -> Scene;
+	static auto createClock(float x, float z)->std::unique_ptr<DrawableObject>;
 	static auto createForest() -> Scene;
-	static auto createSolarSystem() -> Scene;
 };

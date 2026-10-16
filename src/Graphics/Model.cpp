@@ -17,13 +17,15 @@ Model::Model(const float* model, size_t floatCount, int floatsPerVertex) : float
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	// index, number of components, data type, normalized, vertex stride, offset
+	// possition
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)0);
 
+	// normals
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, floatsPerVertex * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 
-	// if model has normals load also normals on attribute 2
+	// if model has normals load also colors on attribute 2
 	if (floatsPerVertex >= 9)
 	{
 		glEnableVertexAttribArray(2);

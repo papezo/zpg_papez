@@ -45,6 +45,12 @@
     <ClInclude Include="src\Graphics\DynamicRotate.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
+    <ClInclude Include="src\Graphics\Camera.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Observers\Observer.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Graphics\Model.cpp">
@@ -69,6 +75,9 @@
       <Filter>Soubory zdrojů</Filter>
     </ClCompile>
     <ClCompile Include="src\Graphics\Transformation.cpp">
+      <Filter>Soubory zdrojů</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Camera.cpp">
       <Filter>Soubory zdrojů</Filter>
     </ClCompile>
   </ItemGroup>

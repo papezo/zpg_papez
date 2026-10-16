@@ -1,4 +1,2 @@
 ﻿  SceneCreator.cpp
-C:\Users\papez\source\repos\zpg_papez\zpg_papez\src\Miscs\SceneCreator.cpp(102,18): warning C4305: inicializování: zkrácení z: double na: float
-C:\Users\papez\source\repos\zpg_papez\zpg_papez\src\Miscs\SceneCreator.cpp(112,24): warning C4244: inicializování: double se převádí na float; může dojít ke ztrátě dat.
   zpg_papez.vcxproj -> C:\Users\papez\source\repos\zpg_papez\x64\Debug\zpg_papez.exe

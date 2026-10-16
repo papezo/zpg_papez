@@ -72,6 +72,7 @@ auto Application::initialization() -> void
 
 
 	window = glfwCreateWindow(1200, 800, "ZPG", NULL, NULL);
+	cam = std::make_unique<Camera>(1200, 800, glm::vec3(0.0f, 0.0f, 3.0f));
 	if (!window)
 	{
 		glfwTerminate();
@@ -120,8 +121,7 @@ auto Application::createShaders() -> void
 
 auto Application::createScenes() -> void
 {
-	scenes.push_back(SceneCreator::createSolarSystem());
-	scenes.push_back(SceneCreator::createTriangle());
+	//scenes.push_back(SceneCreator::createSolarSystem());
 	scenes.push_back(SceneCreator::createForest());
 }
 
@@ -139,13 +139,23 @@ auto Application::setActiveScene(size_t index) -> void
 
 auto Application::run() -> void
 {
+	float lastFrame = 0.0f;
 	while (!glfwWindowShouldClose(window))
 	{
+		float currentFrame = static_cast<float>(glfwGetTime());
+		float deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		if (cam)
+		{
+			cam->KeyInputs(window, deltaTime);
+			cam->MouseInputs(window);
+		}
 
 		if (shader && activeSceneIndex >= 0 && activeSceneIndex < scenes.size())
 		{
-			scenes[activeSceneIndex].render();
+			scenes[activeSceneIndex].render(*cam);
 		}
 
 
