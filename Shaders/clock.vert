@@ -20,13 +20,13 @@ void main()
     vertexColor = color;
 
     if (color.b > 0.9 && color.r < 0.1 && color.g < 0.1) {
-        pos = hourMatrix * pos; // red hand
+        pos = hourMatrix * pos; // blue hand
     }
     else if (color.g > 0.9 && color.r < 0.1 && color.b < 0.1) {
         pos = minuteMatrix * pos; // gree hand
     }
     else if (color.r > 0.9 && color.g < 0.1 && color.b < 0.1) {
-        pos = secondMatrix * pos; // blue hand
+        pos = secondMatrix * pos; // red hand
     } 
     else if(color == vec3(1.0, 1.0, 0.0)) {
         vertexColor = vec3(0.02, 0.76, 0.87); // to set logo color

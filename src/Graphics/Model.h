@@ -11,8 +11,8 @@ public:
 	 auto draw() const -> void;
 
 private:
-	GLuint VAO = 0;
-	GLuint VBO = 0;
-	int floatsPerVertex = 6;
+	GLuint VAO{ 0 };
+	GLuint VBO{ 0 };
+	int floatsPerVertex{ 6 };
 
 };

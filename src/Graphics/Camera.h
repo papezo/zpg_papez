@@ -3,6 +3,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 
 #include <memory>
+#include <vector>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -19,22 +20,24 @@ public:
 	auto KeyInputs(GLFWwindow* window, float time) -> void;
 	auto MouseInputs(GLFWwindow* window) -> void;
 	auto matrixView() const -> glm::mat4;
-	auto matrixProjection(float fovDeg = 60.0f, float nearPlane = 0.1f, float farPlane = 100.0f) const -> glm::mat4;
+	auto matrixProjection(float fovDeg = 60.0f, float near = 0.1f, float far = 100.0f) const -> glm::mat4;
+	auto addObserver(std::shared_ptr<Observer> observer) -> void;
+	auto notify() -> void;
 private:
-	ShaderProgram* m_shaderProgram = nullptr;
-	glm::vec3 Position;
-	glm::vec3 Orientation = glm::vec3(0.0f, 0.0f, -1.0f);
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	ShaderProgram* m_shaderProgram{ nullptr };
+	glm::vec3 Position { 0.0f, 0.0f, 0.0f };
+	glm::vec3 Orientation{ 0.0f, 0.0f, -1.0f };
+	glm::vec3 up{ 0.0f, 1.0f, 0.0f };
 
-	int width;
-	int height;
+	int width{ 0 };
+	int height{ 0 };
 
-	float speed = 1.5f;
-	float sensitivity = 0.1f;
-	bool firstClick = true;
+	float speed{ 1.5f };
+	float sensitivity{ 0.1f };
+	bool firstClick{true};
 
-	double lastX = 0.0f;
-	double lastY = 0.0f;
+	double lastX{ 0.0f };
+	double lastY{ 0.0f };
 
-	std::vector<std::weak_ptr<Observer*>> observers;
+	std::vector<std::weak_ptr<Observer>> observers;
 };

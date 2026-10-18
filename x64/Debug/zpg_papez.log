@@ -1,2 +1,6 @@
-﻿  SceneCreator.cpp
+﻿  Application.cpp
+  Scene.cpp
+  main.cpp
+  SceneCreator.cpp
+  Generování kódu...
   zpg_papez.vcxproj -> C:\Users\papez\source\repos\zpg_papez\x64\Debug\zpg_papez.exe

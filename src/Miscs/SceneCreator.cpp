@@ -20,15 +20,16 @@
 #include <numbers>
 
 
-auto SceneCreator::createMoon() -> std::unique_ptr<DrawableObject>
+auto SceneCreator::createMoon(Camera& camera) -> std::unique_ptr<DrawableObject>
 {
 	auto moonModel = std::make_shared<Model>(moon, sizeof(moon) / sizeof(float), 9);
 	auto moonShader = std::make_shared<ShaderProgram>("Shaders/basic.vert", "Shaders/basic.frag");
+	camera.addObserver(moonShader);
 	auto moonObject = std::make_unique<DrawableObject>(moonModel, moonShader);
 
 	auto composite = std::make_shared<CompositeTransform>();
 
-	// this has to be same as first rotation of earth!
+	// this has to be same as first rotation of earth
 	// its for moon to rotate same as earth by the sun
 	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.05f, glm::vec3(0.0f, 1.0f, 0.0f))); 
 	composite->add(std::make_shared<Translate>(10.0f, 5.0f, 0.0f)); // earth & sun distance
@@ -41,13 +42,14 @@ auto SceneCreator::createMoon() -> std::unique_ptr<DrawableObject>
 	return moonObject;
 }
 
-auto SceneCreator::createClock(float x, float z) -> std::unique_ptr<DrawableObject>
+auto SceneCreator::createClock(float x, float z, Camera& camera) -> std::unique_ptr<DrawableObject>
 {
-	Scene scene;
 	auto clockMod = std::make_shared<Model>(clockModel, sizeof(clockModel) / sizeof(float), 9);
 	auto clockShader = std::make_shared<ShaderProgram>("Shaders/clock.vert", "Shaders/clock.frag");
-	auto clockObj = std::make_unique<DrawableObject>(clockMod, clockShader);
 
+	camera.addObserver(clockShader);
+
+	auto clockObj = std::make_unique<DrawableObject>(clockMod, clockShader);
 	auto composite = std::make_shared<CompositeTransform>();
 
 	composite->add(std::make_shared<Translate>(x, 0.25f, z));
@@ -58,7 +60,7 @@ auto SceneCreator::createClock(float x, float z) -> std::unique_ptr<DrawableObje
 	return clockObj;
 }
 
-auto SceneCreator::createForest() -> Scene
+auto SceneCreator::createForest(Camera& camera) -> Scene
 {
 	Scene scene;
 
@@ -84,12 +86,16 @@ auto SceneCreator::createForest() -> Scene
 	auto grassModel = std::make_shared<Model>(grass, sizeof(grass) / sizeof(float), 6);
 	auto grassShader = std::make_shared<ShaderProgram>("Shaders/basic.vert", "Shaders/basic.frag");
 
+	camera.addObserver(treeShader);
+	camera.addObserver(bushShader);
+	camera.addObserver(grassShader);
+
 	auto groundObj = std::make_unique<DrawableObject>(grassModel, grassShader);
 
 	scene.addObject(std::move(groundObj));
-	scene.addObject(std::move(createClock(0.50f, 0.0f)));
-	scene.addObject(std::move(createClock(-1.0f, -1.0f)));
-	scene.addObject(std::move(createMoon()));
+	scene.addObject(std::move(createClock(0.50f, 0.0f, camera)));
+	scene.addObject(std::move(createClock(-1.0f, -1.0f, camera)));
+	scene.addObject(std::move(createMoon(camera)));
 
 
 

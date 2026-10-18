@@ -11,7 +11,7 @@ uniform mat4 viewMatrix = mat4(1.0);
 uniform mat4 projectionMatrix = mat4(1.0);
 void main()
 {
-    vertexNormal = mat3(transpose(inverse(modelMatrix))) * normal;
+    vertexNormal = normalize(mat3(modelMatrix) * normal);
     if(gl_VertexID > 36443)
     {
         vertexColor = vec3(0.1, 0.5, 0.1); // leafs

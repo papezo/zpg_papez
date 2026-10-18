@@ -39,7 +39,6 @@
     <ClCompile Include="src\Graphics\Model.cpp" />
     <ClCompile Include="src\Graphics\Scene.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
-    <ClCompile Include="src\Graphics\Transformation.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Miscs\SceneCreator.cpp" />
   </ItemGroup>
@@ -136,7 +135,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)libs\glad\include;$(ProjectDir)libs\glfw-3.5.1\include;$(ProjectDir)libs\Models;$(ProjectDir);$(ProjectDir)src;$(ProjectDir)\libs\glm;$(ProjectDir)\Models;$(ProjectDir)\Shaders;$(ProjectDir)\src\Graphics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)libs\glad\include;$(ProjectDir)libs\glfw-3.5.1\include;$(ProjectDir)libs\Models;$(ProjectDir);$(ProjectDir)src;$(ProjectDir)\libs\glm;$(ProjectDir)\Models;$(ProjectDir)\Shaders;$(ProjectDir)\src\Graphics;$(ProjectDir)\src\Observers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

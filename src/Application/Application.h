@@ -28,7 +28,7 @@ private:
 	std::unique_ptr<ShaderProgram> shader;
 	std::vector<Scene> scenes;
 	std::unique_ptr<Camera> cam;
-	size_t activeSceneIndex = 0;
+	size_t activeSceneIndex{ 0 };
 
 
 	static auto error_callback(int error, const char* description) -> void;

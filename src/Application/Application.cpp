@@ -122,7 +122,8 @@ auto Application::createShaders() -> void
 auto Application::createScenes() -> void
 {
 	//scenes.push_back(SceneCreator::createSolarSystem());
-	scenes.push_back(SceneCreator::createForest());
+	scenes.push_back(SceneCreator::createForest(*cam));
+	cam->notify();
 }
 
 auto Application::setActiveScene(size_t index) -> void

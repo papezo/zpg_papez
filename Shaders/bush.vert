@@ -12,7 +12,7 @@ uniform mat4 projectionMatrix = mat4(1.0);
 
 void main()
 {
-    vertexNormal = mat3(transpose(inverse(modelMatrix))) * normal;
+    vertexNormal = normalize(mat3(modelMatrix) * normal);
 
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }

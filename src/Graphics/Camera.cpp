@@ -8,26 +8,30 @@ auto Camera::KeyInputs(GLFWwindow* window, float time) -> void
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		Position += velocity * Orientation;
+		notify();
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		Position += velocity * -Orientation;
+		notify();
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		Position += velocity * -glm::normalize(glm::cross(Orientation, up));
+		notify();
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		Position += velocity * glm::normalize(glm::cross(Orientation, up));
+		notify();
 	}
 
 }
 auto Camera::MouseInputs(GLFWwindow* window) -> void
 {
-	if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
 	{
-		double mouseX, mouseY; // cant use float for glfwGetCursorPos
+		double mouseX, mouseY;
 		glfwGetCursorPos(window, &mouseX, &mouseY);
 
 		if (firstClick)
@@ -51,11 +55,28 @@ auto Camera::MouseInputs(GLFWwindow* window) -> void
 		}
 
 		Orientation = glm::rotate(Orientation, glm::radians(-rotY), up);
+		notify();
 	}
 	else {
 		firstClick = true;
 	}
 
+}
+
+auto Camera::addObserver(std::shared_ptr<Observer> observer) -> void
+{
+	observers.push_back(observer);
+}
+
+auto Camera::notify() -> void
+{
+	for (auto& obs : observers)
+	{
+		if (auto observer = obs.lock())
+		{
+			observer->update(matrixView());
+		}
+	}
 }
 
 
@@ -66,7 +87,7 @@ auto Camera::matrixView() const -> glm::mat4
 	return glm::lookAt(Position, Position + Orientation, up);
 }
 
-auto Camera::matrixProjection(float fovDeg, float nearPlane, float farPlane) const -> glm::mat4
+auto Camera::matrixProjection(float fovDeg, float near, float far) const -> glm::mat4
 {
-	return glm::perspective(glm::radians(fovDeg), (float)(width) / (float)(height), nearPlane, farPlane);
+	return glm::perspective(glm::radians(fovDeg), (float)(width) / (float)(height), near, far);
 }
