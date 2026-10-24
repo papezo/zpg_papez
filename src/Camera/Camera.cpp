@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "ShaderProgram.h"
+#include "../Graphics/ShaderProgram.h"
 
 
 auto Camera::KeyInputs(GLFWwindow* window, float time) -> void

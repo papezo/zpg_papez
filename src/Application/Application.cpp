@@ -1,8 +1,8 @@
 #include "src/Application/Application.h"
 #include "src/Miscs/SceneCreator.h"
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 
 #define GLAD_GL_IMPLEMENTATION
 #include <glad/gl.h>
@@ -70,8 +70,17 @@ auto Application::initialization() -> void
 	glfwWindowHint(GLFW_OPENGL_PROFILE,
 	GLFW_OPENGL_CORE_PROFILE);  //*/
 
+	// because of the mac this has to be here
+	// in case of using Windows comment this
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
-	window = glfwCreateWindow(1200, 800, "ZPG", NULL, NULL);
+
+	window = glfwCreateWindow(1200, 800, "ZPG", nullptr, nullptr);
+
+
 	cam = std::make_unique<Camera>(1200, 800, glm::vec3(0.0f, 0.0f, 3.0f));
 	if (!window)
 	{
@@ -122,7 +131,8 @@ auto Application::createShaders() -> void
 auto Application::createScenes() -> void
 {
 	//scenes.push_back(SceneCreator::createSolarSystem());
-	scenes.push_back(SceneCreator::createForest(*cam));
+	//scenes.push_back(SceneCreator::createForest(*cam));
+	scenes.push_back(SceneCreator::createSolarSystem(*cam));
 	cam->notify();
 }
 
@@ -143,8 +153,8 @@ auto Application::run() -> void
 	float lastFrame = 0.0f;
 	while (!glfwWindowShouldClose(window))
 	{
-		float currentFrame = static_cast<float>(glfwGetTime());
-		float deltaTime = currentFrame - lastFrame;
+		auto currentFrame = static_cast<float>(glfwGetTime());
+		auto deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

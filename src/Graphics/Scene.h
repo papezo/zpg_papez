@@ -1,10 +1,9 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include "src/Graphics/Model.h"
 #include <Graphics/ShaderProgram.h>
 #include "DrawableObject.h"
-#include "Camera.h"
+#include "../Camera/Camera.h"
 
 
 class Scene

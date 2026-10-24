@@ -9,7 +9,7 @@
 #include "Graphics/Model.h"
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/Scene.h"
-#include "Graphics/Camera.h"
+#include "../Camera/Camera.h"
 
 class Application
 {

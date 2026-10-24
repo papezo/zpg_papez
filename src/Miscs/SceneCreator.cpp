@@ -1,46 +1,22 @@
 #include "SceneCreator.h"
 
-#include "Models/moon.h"
-#include "Models/sun.h"
 #include "Models/bushes.h"
 #include "Models/tree.h"
 #include "Models/grass.h"
 #include "Models/clock.h"
+#include "Models/sphere.h"
 
 #include "Graphics/Scene.h"
 #include "Graphics/Model.h"
 #include "Graphics/DrawableObject.h"
 
-#include "Graphics/CompositeTransform.h"
-#include "Graphics/StaticTransformations.h"
-#include "Graphics/DynamicRotate.h"
+#include "Transformations/CompositeTransform.h"
+#include "Transformations/StaticTransformations.h"
 
-#include <corecrt_math_defines.h> // for pi
+#include "SolarSystemCreator.h"
+
 #include <random>
-#include <numbers>
 
-
-auto SceneCreator::createMoon(Camera& camera) -> std::unique_ptr<DrawableObject>
-{
-	auto moonModel = std::make_shared<Model>(moon, sizeof(moon) / sizeof(float), 9);
-	auto moonShader = std::make_shared<ShaderProgram>("Shaders/basic.vert", "Shaders/basic.frag");
-	camera.addObserver(moonShader);
-	auto moonObject = std::make_unique<DrawableObject>(moonModel, moonShader);
-
-	auto composite = std::make_shared<CompositeTransform>();
-
-	// this has to be same as first rotation of earth
-	// its for moon to rotate same as earth by the sun
-	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.05f, glm::vec3(0.0f, 1.0f, 0.0f))); 
-	composite->add(std::make_shared<Translate>(10.0f, 5.0f, 0.0f)); // earth & sun distance
-	composite->add(std::make_shared<DynamicRotate>(0.0f, 0.05f, glm::vec3(0.0f, 1.0f, 0.0f)));  // Moon & Earth rotation
-	composite->add(std::make_shared<Translate>(0.20f, 0.0f, 0.0f)); // Moon & sun distance
-	composite->add(std::make_shared<Scale>(0.5f));
-
-	moonObject->setTransformation(composite);
-
-	return moonObject;
-}
 
 auto SceneCreator::createClock(float x, float z, Camera& camera) -> std::unique_ptr<DrawableObject>
 {
@@ -95,9 +71,6 @@ auto SceneCreator::createForest(Camera& camera) -> Scene
 	scene.addObject(std::move(groundObj));
 	scene.addObject(std::move(createClock(0.50f, 0.0f, camera)));
 	scene.addObject(std::move(createClock(-1.0f, -1.0f, camera)));
-	scene.addObject(std::move(createMoon(camera)));
-
-
 
 	for (auto i = 0; i < amountOfTrees; i++)
 	{
@@ -125,6 +98,66 @@ auto SceneCreator::createForest(Camera& camera) -> Scene
 		bushObj->setTransformation(composite);
 		scene.addObject(std::move(bushObj));
 	}
+
+	return scene;
+}
+
+
+auto SceneCreator::createBallScene(Camera& camera) -> Scene
+{
+	Scene scene;
+	// positions for the balls
+	const glm::vec3 positions[] = {
+		{ 0.0f,  1.0f, 0.0f },
+		{-1.0f,  0.0f, 0.0f },
+		{ 1.0f,  0.0f, 0.0f },
+		{ 0.0f, -1.0f, 0.0f }
+	};
+
+	auto ballMod = std::make_shared<Model>(sphere, sizeof(sphere) / sizeof(float), 6);
+	auto ballShader = std::make_shared<ShaderProgram>("Shaders/Lighting/lighting.vert", "Shaders/Lighting/blinn_phong.frag");
+
+	ballShader->use();
+	ballShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
+	ballShader->setUniform("objectColor", 0.3f, 0.7f, 0.9f);
+
+	camera.addObserver(ballShader);
+
+	auto ballObj = std::make_unique<DrawableObject>(ballMod, ballShader);
+	auto composite = std::make_shared<CompositeTransform>();
+
+	for (const auto& position : positions)
+	{
+		auto ballObj = std::make_unique<DrawableObject>(
+			ballMod, ballShader);
+
+		auto composite = std::make_shared<CompositeTransform>();
+		composite->add(std::make_shared<Translate>(position));
+		composite->add(std::make_shared<Scale>(0.4f));
+
+		ballObj->setTransformation(composite);
+		scene.addObject(std::move(ballObj));
+	}
+
+	return scene;
+
+
+}
+
+auto SceneCreator::createSolarSystem(Camera& camera) -> Scene
+{
+	Scene scene;
+	SolarSystemCreator solarSystem;
+
+	scene.addObject(solarSystem.createBlackHole(camera));
+	scene.addObject(solarSystem.createEarth(camera));
+	scene.addObject(solarSystem.createSun(camera));
+	scene.addObject(solarSystem.createMars(camera));
+	scene.addObject(solarSystem.createMercury(camera));
+	scene.addObject(solarSystem.createMoon(camera));
+	scene.addObject(solarSystem.createVenus(camera));
+
+	scene.addObject(solarSystem.createSignature(camera));
 
 	return scene;
 }

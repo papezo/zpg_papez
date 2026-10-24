@@ -4,7 +4,6 @@
 
 #include <memory>
 #include <vector>
-#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -20,7 +19,7 @@ public:
 	auto KeyInputs(GLFWwindow* window, float time) -> void;
 	auto MouseInputs(GLFWwindow* window) -> void;
 	auto matrixView() const -> glm::mat4;
-	auto matrixProjection(float fovDeg = 60.0f, float near = 0.1f, float far = 100.0f) const -> glm::mat4;
+	auto matrixProjection(float fovDeg = 60.0f, float near = 0.1f, float far = 10000.0f) const -> glm::mat4;
 	auto addObserver(std::shared_ptr<Observer> observer) -> void;
 	auto notify() -> void;
 private:
@@ -32,8 +31,8 @@ private:
 	int width{ 0 };
 	int height{ 0 };
 
-	float speed{ 1.5f };
-	float sensitivity{ 0.1f };
+	float speed{ 300.5f };
+	float sensitivity{ 0.5f };
 	bool firstClick{true};
 
 	double lastX{ 0.0f };

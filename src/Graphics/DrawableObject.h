@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
 #include "Model.h"
-#include "Transformation.h"
+#include "../Transformations/Transformation.h"
 #include "ShaderProgram.h"
-#include "Camera.h"
+#include "../Camera/Camera.h"
 
 #include <glm/glm.hpp>
 

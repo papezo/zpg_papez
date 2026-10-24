@@ -1,8 +1,7 @@
 #include "Graphics/ShaderProgram.h"
-#include "Graphics/Camera.h"
+#include "../Camera/Camera.h"
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
 #include <fstream>
 #include <string>
 #include <iterator>
@@ -13,7 +12,7 @@ auto ShaderProgram::use() const -> void
 	glUseProgram(this->id);
 }
 
-auto ShaderProgram::setUniform(const std::string& name, float value) -> void
+auto ShaderProgram::setUniform(const std::string& name, float value) const -> void
 {
 	GLint loc = glGetUniformLocation(this->id, name.c_str());
 	if (loc == -1) {
@@ -23,7 +22,7 @@ auto ShaderProgram::setUniform(const std::string& name, float value) -> void
 	glUniform1f(loc, value);
 }
 
-auto ShaderProgram::setUniform(const std::string& name, float x, float y, float z) -> void
+auto ShaderProgram::setUniform(const std::string& name, float x, float y, float z) const -> void
 {
 	GLint loc = glGetUniformLocation(this->id, name.c_str());
 	if (loc == -1) {
@@ -33,7 +32,7 @@ auto ShaderProgram::setUniform(const std::string& name, float x, float y, float 
 	glUniform3f(loc, x, y, z);
 }
 
-auto ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix) -> void
+auto ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix) const -> void
 {
 	GLint loc = glGetUniformLocation(this->id, name.c_str());
 	if (loc == -1) {

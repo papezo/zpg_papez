@@ -1,6 +1,5 @@
 #include "Model.h"
 
-
 Model::Model(const float* model, size_t floatCount, int floatsPerVertex) : floatsPerVertex(floatsPerVertex)
 {
 	//vertex buffer object (VBO)
