@@ -47,6 +47,15 @@ auto Application::window_iconify_callback(GLFWwindow* window, int iconified) -> 
 auto Application::window_size_callback(GLFWwindow* window, int width, int height) -> void {
 	printf("resize %d, %d \n", width, height);
 	glViewport(0, 0, width, height);
+
+	auto* app = static_cast<Application*>(
+		glfwGetWindowUserPointer(window));
+
+	// this is for when user resizes the window
+	if (app && app->cam)
+	{
+		app->cam->resize(width, height);
+	}
 }
 
 auto Application::cursor_callback(GLFWwindow* window, double x, double y) -> void { printf("cursor_callback \n"); }
@@ -61,6 +70,8 @@ auto Application::initialization() -> void
 	// Initialize GLFW
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
+
+
 
 	//Initialization of a specific version
 	/*
@@ -95,11 +106,11 @@ auto Application::initialization() -> void
 	// we cant use keyboard callbacks
 	glfwSetWindowUserPointer(window, this);
 
-	// GLFW callbacks
+	// GLFW callbacks.
+	glfwSetFramebufferSizeCallback(window, window_size_callback);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetWindowFocusCallback(window, window_focus_callback);
 	glfwSetWindowIconifyCallback(window, window_iconify_callback);
-	glfwSetWindowSizeCallback(window, window_size_callback);
 	glfwSetCursorPosCallback(window, cursor_callback);
 	glfwSetMouseButtonCallback(window, button_callback);
 
@@ -109,6 +120,13 @@ auto Application::initialization() -> void
 		printf("GLAD initialization failed\n");
 		//return -1;
 	}
+
+	// we get framebuffer sizes that are in px
+	// and save them in our vars
+	// and call function resize in window_size_callback func
+	int width, height;
+	glfwGetFramebufferSize(window, &width, &height);
+	window_size_callback(window, width, height);
 
 	// Get version info
 	printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
@@ -132,7 +150,8 @@ auto Application::createScenes() -> void
 {
 	//scenes.push_back(SceneCreator::createSolarSystem());
 	//scenes.push_back(SceneCreator::createForest(*cam));
-	scenes.push_back(SceneCreator::createSolarSystem(*cam));
+	//scenes.push_back(SceneCreator::createSolarSystem(*cam));
+	scenes.push_back(SceneCreator::createBallScene(*cam));
 	cam->notify();
 }
 

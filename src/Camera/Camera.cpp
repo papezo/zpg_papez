@@ -63,6 +63,16 @@ auto Camera::MouseInputs(GLFWwindow* window) -> void
 
 }
 
+auto Camera::resize(int newWidth, int newHeight) -> void {
+	if (newWidth <= 0 || newHeight <= 0) {
+		return;
+	}
+
+	width = newWidth;
+	height = newHeight;
+
+}
+
 auto Camera::addObserver(std::shared_ptr<Observer> observer) -> void
 {
 	observers.push_back(observer);

@@ -20,6 +20,7 @@ public:
 	auto MouseInputs(GLFWwindow* window) -> void;
 	auto matrixView() const -> glm::mat4;
 	auto matrixProjection(float fovDeg = 60.0f, float near = 0.1f, float far = 10000.0f) const -> glm::mat4;
+	auto resize(int newWidth, int newHeight) -> void;
 	auto addObserver(std::shared_ptr<Observer> observer) -> void;
 	auto notify() -> void;
 private:

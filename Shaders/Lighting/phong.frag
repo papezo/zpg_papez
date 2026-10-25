@@ -9,7 +9,7 @@ out vec4 FragColor;
 uniform vec3 lightPosition;
 uniform vec3 cameraPosition;
 uniform vec3 lightColor;
-// maybe add shiness uniform?
+uniform float shiness;
 
 void main()
 {
@@ -24,13 +24,13 @@ void main()
     vec3 diffuse = diff * lightColor;
 
     // Specular
-    vec3 V = normalize(cameraPosition - worldPosition);
-    vec3 R = reflect(-lightDir, norm);
+    vec3 viewDirection = normalize(cameraPosition - worldPosition);
+    vec3 reflecDirection = reflect(-lightDir, norm);
 
     float spec = 0.0;
     if (diff > 0.0)
     {
-        spec = pow(max(dot(V, R), 0.0), 32.0);
+        spec = pow(max(dot(viewDirection, reflecDirection), 0.0), shiness);
     }
 
     vec3 specular = 0.5 * spec * lightColor;

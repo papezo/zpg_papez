@@ -120,7 +120,7 @@ auto SceneCreator::createBallScene(Camera& camera) -> Scene
 	ballShader->use();
 	ballShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
 	ballShader->setUniform("objectColor", 0.3f, 0.7f, 0.9f);
-
+	ballShader->setUniform("shiness", 32.0);
 	camera.addObserver(ballShader);
 
 	auto ballObj = std::make_unique<DrawableObject>(ballMod, ballShader);

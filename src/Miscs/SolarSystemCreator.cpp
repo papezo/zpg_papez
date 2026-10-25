@@ -42,6 +42,7 @@ auto SolarSystemCreator::createMoon(Camera& camera) -> std::unique_ptr<DrawableO
     moonShader->use();
     moonShader->setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
     moonShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
+    moonShader->setUniform("shiness", 32.0);
 
     camera.addObserver(moonShader);
 
@@ -90,6 +91,7 @@ auto SolarSystemCreator::createEarth(Camera& camera) -> std::unique_ptr<Drawable
     earthShader->use();
     earthShader->setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
     earthShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
+    earthShader->setUniform("shiness", 32.0);
 
     camera.addObserver(earthShader);
 
@@ -134,6 +136,7 @@ auto SolarSystemCreator::createMercury(Camera& camera) -> std::unique_ptr<Drawab
     mercuryShader->use();
     mercuryShader->setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
     mercuryShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
+    mercuryShader->setUniform("shiness", 32.0);
 
     camera.addObserver(mercuryShader);
 
@@ -163,6 +166,7 @@ auto SolarSystemCreator::createVenus(Camera& camera) -> std::unique_ptr<Drawable
     venusShader->use();
     venusShader->setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
     venusShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
+    venusShader->setUniform("shiness", 32.0);
 
     camera.addObserver(venusShader);
 
@@ -190,6 +194,7 @@ auto SolarSystemCreator::createMars(Camera& camera) -> std::unique_ptr<DrawableO
     marsShader->use();
     marsShader->setUniform("lightPosition", 0.0f, 0.0f, 0.0f);
     marsShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
+    marsShader->setUniform("shiness", 32.0);
 
     auto marsObj = std::make_unique<DrawableObject>(marsModel, marsShader);
 
