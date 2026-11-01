@@ -41,11 +41,14 @@ void main()
     // Specular
     float spec = 0.0;
 
-    if (diff > 0.0)
+    if(diff > 0.0f)
     {
         vec3 halfwayDir = normalize(lightDir + viewDir);
         spec = pow(max(dot(normal, halfwayDir), 0.0), shiness);
     }
+
+
+
 
     vec3 specular = 0.5 * lightColor * spec;
 

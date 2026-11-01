@@ -32,7 +32,7 @@ void main()
     vec3 viewDir = normalize(cameraPosition - worldPosition);
 
     // Ambient
-    vec3 ambient = 0.4 * lightColor;
+    vec3 ambient = 1.0f * lightColor;
 
     // Diffuse
     float diff = max(dot(normal, lightDir), 0.0);

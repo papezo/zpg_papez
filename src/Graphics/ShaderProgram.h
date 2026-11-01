@@ -15,7 +15,7 @@ public:
 	~ShaderProgram();
 
 	auto use() const -> void;
-	auto update(const glm::mat4& view) -> void override; // function so if camera annonces change -> update viewMatrix
+	auto update(const glm::mat4& view, const glm::vec3& position) -> void override; // function so if camera annonces change -> update viewMatrix
 
 	auto setUniform(const std::string& name, float value) const -> void;
 	auto setUniform(const std::string& name, float x, float y, float z) const -> void;

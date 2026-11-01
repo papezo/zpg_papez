@@ -98,10 +98,11 @@ auto ShaderProgram::createShaderFromFile(GLenum shaderType, const char* shaderFi
 	return shaderID;
 }
 
-auto ShaderProgram::update(const glm::mat4& view) -> void
+auto ShaderProgram::update(const glm::mat4& view, const glm::vec3& position) -> void
 {
 	use();
 	setUniform("viewMatrix", view);
+	setUniform("cameraPosition", position.x, position.y, position.z);
 }
 
 ShaderProgram::~ShaderProgram()

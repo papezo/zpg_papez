@@ -84,7 +84,7 @@ auto Camera::notify() -> void
 	{
 		if (auto observer = obs.lock())
 		{
-			observer->update(matrixView());
+			observer->update(matrixView(), Position);
 		}
 	}
 }

@@ -17,7 +17,9 @@ void main(void){
     vec4 pos = modelMatrix * vec4(position,1.0f);
     worldPosition = pos.xyz/pos.w;
     mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
-    worldNormal = normalMatrix * normal;
+    worldNormal = transpose(inverse(mat3(modelMatrix))) * normal;
+    // mat3(modelMatrix) * normal;transpose(inverse(mat3(modelMatrix))) * normal;
+    //
 
     vertexColor = color;
     gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(position,1.0f);

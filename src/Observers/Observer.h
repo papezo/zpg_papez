@@ -4,6 +4,6 @@
 class Observer 
 {
 public:
-	virtual auto update(const glm::mat4& view) -> void = 0;
+	virtual auto update(const glm::mat4& view, const glm::vec3& position) -> void = 0;
 	virtual ~Observer() = default;
 };

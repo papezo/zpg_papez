@@ -59,24 +59,43 @@ auto SceneCreator::createLight(Camera& camera) -> std::unique_ptr<DrawableObject
 	return lightObj;
 }
 
+static auto GenerateTrees() -> int {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	std::uniform_int_distribution<int> distTrees(150, 200);
+
+	int amountOfTrees = distTrees(gen);
+
+	return amountOfTrees;
+}
+
+static auto GenerateBushes() -> int {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	std::uniform_int_distribution<int> distBushes(150, 200);
+
+	int amountOfBushes = distBushes(gen);
+
+	return amountOfBushes;
+}
+
 auto SceneCreator::createForest(Camera& camera) -> Scene
 {
 	Scene scene;
-	Light light(glm::vec3(0.0f, 0.3f, 0.0f),glm::vec3(1.0f, 0.9f, 0.7f),1.0f, 0.09f, 3.0f);
-
+	Light light(glm::vec3(0.0f, 0.3f, 0.0f),glm::vec3(1.0f, 0.9f, 0.7f),1.0f, 0.09f, 6.0f);
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> distTrees(150, 200);
-	std::uniform_int_distribution<int> distBushes(150, 200);
 
 	std::uniform_real_distribution<float> posDist(-35.0f, 35.0f);
 	std::uniform_real_distribution<float> bushDist(-6.0f, 6.0f);
 
 	std::uniform_real_distribution<float> treesScale(0.03f, 0.15f);
 
-	int amountOfTrees = distTrees(gen);
-	int amountOfBushes = distBushes(gen);
+	int amountOfTrees = GenerateTrees();
+	int amountOfBushes = GenerateBushes();
 
 	auto treeModel = std::make_shared<Model>(tree, sizeof(tree) / sizeof(float), 6);
 	auto treeShader = std::make_shared<ShaderProgram>("Shaders/tree.vert", "Shaders/tree.frag");
@@ -140,6 +159,10 @@ auto SceneCreator::createForest(Camera& camera) -> Scene
 auto SceneCreator::createBallScene(Camera& camera) -> Scene
 {
 	Scene scene;
+	Light light(glm::vec3(3.0f, 0.0f, 0.0f),
+		glm::vec3(1.0f),
+		1.0f, 0.0f, 0.0f);
+
 	// positions for the balls
 	constexpr glm::vec3 positions[] = {
 		{ 0.0f,  1.0f, 0.0f },
@@ -151,18 +174,20 @@ auto SceneCreator::createBallScene(Camera& camera) -> Scene
 	auto ballMod = std::make_shared<Model>(sphere, sizeof(sphere) / sizeof(float), 6);
 	auto ballShader = std::make_shared<ShaderProgram>("Shaders/Lighting/lighting.vert", "Shaders/Lighting/blinn_phong.frag");
 
+	light.applyLight(*ballShader);
+
 	ballShader->use();
 	ballShader->setUniform("lightColor", 1.0f, 1.0f, 1.0f);
 	ballShader->setUniform("objectColor", 0.3f, 0.7f, 0.9f);
-	ballShader->setUniform("shiness", 32.0);
+	ballShader->setUniform("shiness", 1.0f);
 	camera.addObserver(ballShader);
-
-	auto ballObj = std::make_unique<DrawableObject>(ballMod, ballShader);
-	auto composite = std::make_shared<CompositeTransform>();
 
 	for (const auto& position : positions)
 	{
+		auto ballObj = std::make_unique<DrawableObject>(ballMod, ballShader);
+		auto composite = std::make_shared<CompositeTransform>();
 		composite->add(std::make_shared<Translate>(position));
+
 		composite->add(std::make_shared<Scale>(0.4f));
 
 		ballObj->setTransformation(composite);
