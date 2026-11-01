@@ -110,9 +110,9 @@ auto Application::initialization() -> void
 	glfwSetFramebufferSizeCallback(window, window_size_callback);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetWindowFocusCallback(window, window_focus_callback);
-	glfwSetWindowIconifyCallback(window, window_iconify_callback);
-	glfwSetCursorPosCallback(window, cursor_callback);
-	glfwSetMouseButtonCallback(window, button_callback);
+	//glfwSetWindowIconifyCallback(window, window_iconify_callback);
+	//glfwSetCursorPosCallback(window, cursor_callback);
+	//glfwSetMouseButtonCallback(window, button_callback);
 
 	// Initialize GLAD and load OpenGL function pointers
 	if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress))
@@ -149,9 +149,9 @@ auto Application::createShaders() -> void
 auto Application::createScenes() -> void
 {
 	//scenes.push_back(SceneCreator::createSolarSystem());
-	//scenes.push_back(SceneCreator::createForest(*cam));
+	scenes.push_back(SceneCreator::createForest(*cam));
 	//scenes.push_back(SceneCreator::createSolarSystem(*cam));
-	scenes.push_back(SceneCreator::createBallScene(*cam));
+	//scenes.push_back(SceneCreator::createBallScene(*cam));
 	cam->notify();
 }
 

@@ -16,4 +16,6 @@ public:
 	static auto createForest(Camera& camera) -> Scene;
 	static auto createSolarSystem(Camera& camera) -> Scene;
 	static auto createBallScene(Camera& camera) -> Scene;
+
+	static auto createLight(Camera& camera) -> std::unique_ptr<DrawableObject>;
 };

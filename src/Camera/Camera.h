@@ -24,7 +24,6 @@ public:
 	auto addObserver(std::shared_ptr<Observer> observer) -> void;
 	auto notify() -> void;
 private:
-	ShaderProgram* m_shaderProgram{ nullptr };
 	glm::vec3 Position { 0.0f, 0.0f, 0.0f };
 	glm::vec3 Orientation{ 0.0f, 0.0f, -1.0f };
 	glm::vec3 up{ 0.0f, 1.0f, 0.0f };
@@ -32,8 +31,8 @@ private:
 	int width{ 0 };
 	int height{ 0 };
 
-	float speed{ 300.5f };
-	float sensitivity{ 0.5f };
+	float speed{ 5.0f };
+	float sensitivity{ 1.0f };
 	bool firstClick{true};
 
 	double lastX{ 0.0f };

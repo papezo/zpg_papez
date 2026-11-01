@@ -26,6 +26,8 @@ add_executable(zpg
         src/Miscs/SceneCreator.cpp
         src/Miscs/SolarSystemCreator.cpp
         src/Miscs/SolarSystemCreator.h
+        src/Graphics/Light.cpp
+        src/Graphics/Light.h
 )
 
 target_include_directories(zpg PRIVATE

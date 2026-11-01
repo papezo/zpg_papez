@@ -11,6 +11,20 @@ uniform vec3 lightColor;
 uniform vec3 objectColor;
 uniform float shiness;
 
+uniform float attenuationConstant;
+uniform float attenuationLinear;
+uniform float attenuationQuadratic;
+
+float attenuation(float d, float c, float l, float q)
+{
+    // d = distance from the light to the fragment
+    // c = constant attenuation factor
+    // l = linear attenuation factor
+    // q = quadratic attenuation factor
+    float att=1.0/ (c + l*d + q*d*d);
+    return clamp(att , 0.0 , 1.0);
+}
+
 void main()
 {
     vec3 normal = normalize(worldNormal);
@@ -35,6 +49,10 @@ void main()
 
     vec3 specular = 0.5 * lightColor * spec;
 
-    vec3 result = (ambient + diffuse) * objectColor + specular;
+    float dist = length(lightPosition - worldPosition );
+
+    float att = attenuation(dist, attenuationConstant, attenuationLinear, attenuationQuadratic);
+
+    vec3 result = att * ((ambient + diffuse) * objectColor + specular);
     FragColor = vec4(result, 1.0);
 }
